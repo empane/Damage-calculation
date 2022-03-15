@@ -25,9 +25,7 @@ class Player():             #Klassen, som beskriver spelaren.
     def calc_multiplier(self, armor):
         if self.armor > 0:
             dan = 100 + self.armor
-            print("dan:", dan)
             damage_multiplier = 100/dan
-            print("mul:", damage_multiplier)
             return damage_multiplier
 
         else:
@@ -45,7 +43,7 @@ class Player():             #Klassen, som beskriver spelaren.
             return damage_multi
 
     
-
+#Spelarna:
 p1 = Player("Alex", 0, 0, 0, 0, 0, 0)
 p2 = Player("Will", 0, 0, 0, 0, 0, 0)
 
@@ -82,7 +80,7 @@ def choice():
         print(p2.hp)
         
     elif val == "m":
-        p2.take_damage_mr(p1.magic_attack)
+        p2.take_damage_mr(p1.magic_attack) #Anropar funktionen
         print("Total magical damage:", round(p2.damage, 2))
         p2.hp -= p2.damage
         print(p2.hp)
@@ -96,14 +94,15 @@ def choice():
     #Funktionen körs.
 choice()
 
-print("A-delen")
 
+print("A-delen")
+#Funktion till listan av val.
 def main():
     p1.attack = 0 
     p2.armor = 0
-    p1.magic_attack = 0
+    p1.magic_attack = 0 #Från början är alla värden noll, så att inget blir fel, med nästa omgång
     p2.magical_res = 0
-    p2.hp = 100
+    p2.hp = 200
     
     print("\n1. Do attack:")
     print("2. Do magic attack:")
@@ -111,37 +110,38 @@ def main():
     print("4. Exit program")
 
     choice = input("What choice?\n")
-
+#Om du trycker 1 så blir det denna if-sats.
     if choice == "1":
         p1.attack = input("How much attack?\n")
         p2.armor = input("How much armor?\n")
 
-        p1.attack = int(p1.attack)
+        p1.attack = int(p1.attack) #Gör om str till int
         p2.armor = int(p2.armor)
 
 
-        p2.take_damage(p1.attack)
-        p2.hp -= p2.damage
+        p2.take_damage(p1.attack) #Anropar för att attackera
+        p2.hp -= p2.damage #Subtraherar bort skadan på hp
 
-        print("\nTotal damage:", round(p2.damage,2))
+        print("\nTotal damage:", round(p2.damage,2)) #Skriver ut svaren och avrundar
         print("Opponents HP:", round(p2.hp, 2))
 
     elif choice == "2":
-        p1.magic_attack = input("How much magic attack?\n")
+        p1.magic_attack = input("How much magic attack?\n") #Frågar användaren hur mycket de olika värdena ska vara.
         p2.magical_res = input("How much magic resistance?\n")
 
-        p1.magic_attack = int(p1.magic_attack)
+        p1.magic_attack = int(p1.magic_attack) #str till int
         p2.magical_res = int(p2.magical_res)
 
-        p2.take_damage_mr(p1.magic_attack)
+        p2.take_damage_mr(p1.magic_attack) #Anropar att attackera
         p2.hp -= p2.damage
 
-        print("\nTotal damage:", round(p2.damage,2))
+        print("\nTotal damage:", round(p2.damage,2))#Skriver ut svaren
         print("Opponents HP:", round(p2.hp, 2))
 
-    elif choice == "3":
+#Mixad attack
+    elif choice == "3": 
         p1.attack = input("How much attack?\n")
-        p2.armor = input("How much armor?\n")
+        p2.armor = input("How much armor?\n")       #Frågar användaren, för att få värdena
         p1.magic_attack = input("How much magic attack?\n")
         p2.magical_res = input("How much magic resistance?\n")
 
@@ -150,30 +150,32 @@ def main():
         p1.magic_attack = int(p1.magic_attack)
         p2.magical_res = int(p2.magical_res)
 
-        p2.take_damage(p1.attack)
-        p2.hp -= p2.damage
-        p2.take_damage_mr(p1.magic_attack)
+        p2.take_damage(p1.attack) #Anropar första attacken
+        p2.hp -= p2.damage          # Subtraherar bort skadan från HP
+        p2.take_damage_mr(p1.magic_attack) #Anropar andra attacken
         p2.hp -= p2.damage
 
-        print("\nTotal damage:", round(p2.damage,2))
+        print("\nTotal damage:", round(p2.damage,2)) #Skriver ut svaren
         print("Opponents HP:", round(p2.hp, 2))
 
 
     elif choice == "4":
-        print("Exiting programme")
+        print("Exiting programme") # Stänger av programmet
         exit()
 
+#Om den får ett annat nummer så kommer den säga till och gå tillbaka.
     else:
-        print("Undentified number, try again")
+        print("Undentified number, try again") 
         main()
 
-
+#Efter funktionen är avklarad så frågar den om man vill gå tillbaka.
     while choice != "5":
         go_back = input("Do you want to go back? Press enter or if you dont want to type no.\n")
         while go_back != "no":
             main()
 
-        
+
+#Funktionen körs.        
 main()
 
         
